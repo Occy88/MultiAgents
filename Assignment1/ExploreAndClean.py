@@ -72,11 +72,11 @@ class ExploreAndClean:
         # default message to send,
         # ============ CONDITIONS FOR MAX EDGE BEING FOUND ===============
         # conditions either of top corners of the agent detecting the maximal edge (y max, x max)
-        if (AgentPercepts.RIGHT not in cam_results and self.orientation in [GridDirections.TOP.value,
+        if (AgentPercepts.RIGHT.value not in cam_results and self.orientation in [GridDirections.TOP.value,
                                                                             GridDirections.RIGHT.value]) \
-                or (AgentPercepts.LEFT not in cam_results and self.orientation in [GridDirections.LEFT.value,
+                or (AgentPercepts.LEFT.value not in cam_results and self.orientation in [GridDirections.LEFT.value,
                                                                                    GridDirections.BOTTOM.value]) \
-                or (AgentPercepts.TOP not in cam_results and self.orientation in [GridDirections.BOTTOM.value,
+                or (AgentPercepts.TOP.value not in cam_results and self.orientation in [GridDirections.BOTTOM.value,
                                                                                   GridDirections.RIGHT.value]):
             self.max_edge_found()
             print('t1')
@@ -111,7 +111,7 @@ class ExploreAndClean:
                 print("t5")
 
             return
-        if AgentPercepts.TOP in cam_results:
+        if AgentPercepts.TOP.value in cam_results:
             print("t6")
 
             self.action = action.move()
