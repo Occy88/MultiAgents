@@ -186,8 +186,6 @@ def get_closest_agent(agent_list, point):
         return
     closest_agent = agent_list[0]
     for agent in agent_list:
-        if agent[0][1]=='user':
-            continue
         agent_pos = agent[1]
         distance = dist(agent_pos, point)
         if distance < closest_distance:

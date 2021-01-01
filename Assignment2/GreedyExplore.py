@@ -10,7 +10,6 @@ from agent_util import GridState
 from agent_util import dist
 import random
 import json
-import numpy as np
 
 
 class GreedyExplore:
@@ -62,6 +61,7 @@ class GreedyExplore:
                     price_matrix[x][y] *= self.penalty
                 else:
                     price_matrix[x][y] -= self.penalty
+
         # convert each node as the sum of it's surrounding nodes
         neighbours = [(-1, -1), (-1, 0), (0, -1), (0, 0), (0, 1), (1, 1), (1, 0)]
         new_m = price_matrix.copy()
@@ -72,15 +72,15 @@ class GreedyExplore:
                     if 0 <= n_p[0] < self.grid_size and 0 <= n_p[1] < self.grid_size:
                         new_m[x][y] += price_matrix[x][y]
 
-        new_m = np.array(new_m)
-        print(np.array2string(new_m))
         print(self.colour)
         return new_m
+    def transpose(self,matrix):
+        return zip(*matrix)
 
     def choose_max(self, price_matrix):
         max = -math.inf
         # choose a max
-        price_matrix = price_matrix.transpose()
+        price_matrix=self.transpose(price_matrix)
         for x, l in enumerate(price_matrix):
             for y, p in enumerate(l):
                 if p > max:

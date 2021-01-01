@@ -32,7 +32,7 @@ class Cleaner:
         self.grid_state = GridState()
         self.orientation = 'none'
         self.position = (-1, -1)
-        # penalty if othe(key=lambda x: x[0]r agent is closer:
+        # penalty if other agent is closer:
         self.penalty = 10
         # penalty for points on an edge
 
@@ -50,22 +50,12 @@ class Cleaner:
 
     def choose_dirt(self, dirt_list, agent_list):
         chosen_pairs = []
-        distances=[]
         for dirt in dirt_list:
-            min_dist=0
-            for agent in agent_list:
-                print(dirt,agent)
-                distances.append((dist(dirt[1],agent[1]),dirt,agent))
-
-        removed={}
-        print(distances)
-        distances.sort(key=lambda x: x[0])
-        for distance,dirt,agent in distances:
-            print(distance,dirt,agent)
-            if dirt[0][0] not in removed and agent[0][0] not in removed:
-                chosen_pairs.append((agent,dirt))
-                removed[agent[0][0]]=0
-                removed[dirt[0][0]]=0
+            if len(agent_list) == 0:
+                break
+            chosen_agent = get_closest_agent(agent_list, dirt[1])
+            agent_list.remove(chosen_agent)
+            chosen_pairs.append((chosen_agent, dirt))
 
         return chosen_pairs
 
